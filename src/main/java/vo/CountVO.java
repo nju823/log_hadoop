@@ -26,8 +26,7 @@ public class CountVO implements Writable,DBWritable{
     }
 
     public void readFields(ResultSet resultSet) throws SQLException {
-        this.target=resultSet.getString(1);
-        this.count=resultSet.getLong(2);
+
     }
 
     public String getTarget() {

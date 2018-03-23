@@ -1,5 +1,7 @@
 package main;
 
+import mapreduce.system_invoke_count.HourCountJob;
+import mapreduce.system_invoke_count.HourCountReducer;
 import test.LoadData;
 
 /**
@@ -8,7 +10,7 @@ import test.LoadData;
 public class Main {
 
     public static void main(String[] args){
-        LoadData loadData=new LoadData();
-        loadData.run();
+        HourCountJob job=new HourCountJob();
+        job.run();
     }
 }
