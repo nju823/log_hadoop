@@ -29,7 +29,7 @@ public class MergeJob {
         try{
             new BaseDriver().initJob(new JobInitModel[]{jobInitModel});
         }catch (Exception e){
-
+            e.printStackTrace();
         }
 
     }

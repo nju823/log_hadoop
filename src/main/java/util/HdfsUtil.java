@@ -4,7 +4,9 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.io.IOUtils;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 
 /**
@@ -119,8 +121,18 @@ public class HdfsUtil {
     public static void download(String remote, String local) throws IOException {
         Path path = new Path(remote);
         FileSystem fs = FileSystem.get(URI.create(HDFS), conf);
-        fs.copyToLocalFile(path, new Path(local));
-        System.out.println("download: from" + remote + " to " + local);
+        FSDataInputStream hdfsInStream = fs.open(new Path(remote));
+
+        OutputStream out = new FileOutputStream(local);
+        byte[] ioBuffer = new byte[1024];
+        int readLen = hdfsInStream.read(ioBuffer);
+
+        while(-1 != readLen){
+            out.write(ioBuffer, 0, readLen);
+            readLen = hdfsInStream.read(ioBuffer);
+        }
+        out.close();
+        hdfsInStream.close();
         fs.close();
     }
 
@@ -144,6 +156,7 @@ public class HdfsUtil {
     }
 
     public static void main(String[] args) throws IOException {
-        HdfsUtil.ls("/");
+//        HdfsUtil.ls("/");
+        HdfsUtil.download(HdfsUtil.HDFS+"log_2018318_merged/part-r-00000","merged_log");
     }
 }

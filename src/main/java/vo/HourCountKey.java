@@ -1,4 +1,4 @@
-package mapreduce.system_invoke_count;
+package vo;
 
 import org.apache.hadoop.io.WritableComparable;
 

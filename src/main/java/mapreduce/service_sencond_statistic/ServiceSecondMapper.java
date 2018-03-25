@@ -8,6 +8,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import util.BeanUtil;
+import util.LoggerUtil;
 import util.TimeUtil;
 import vo.*;
 
@@ -23,7 +24,11 @@ public class ServiceSecondMapper extends Mapper<LongWritable,Text,Text,Text>{
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         MergedAccessLog log=JSONObject.parseObject(value.toString(),MergedAccessLog.class);
-
+        if(log==null){
+            LoggerUtil.log("--------------------------------------");
+            LoggerUtil.log(value.toString());
+            return;
+        }
         //复制维度信息
         ServiceSecondKey serviceSecondKey=new ServiceSecondKey();
         BeanUtil.copyProperties(serviceSecondKey,log);
@@ -31,7 +36,10 @@ public class ServiceSecondMapper extends Mapper<LongWritable,Text,Text,Text>{
         serviceSecondKey.setSecond(TimeUtil.getSecond(log.getRequestTime()));
 
         //计算统计指标
-        long accessTime=log.getResponseTime()-log.getRequestTime();
+        long accessTime=60000;
+        if(log.getResponseTime()!=null){
+            accessTime=log.getResponseTime()-log.getRequestTime();
+        }
         long errorCount=log.getIsError() ? 1 : 0;
         long noResponseCount=log.getHasResponse() ? 0 : 1;
         long slowCount=accessTime<20000 ? 0 : 1;//默认超过20s未慢访问

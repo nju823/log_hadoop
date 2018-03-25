@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
-import vo.CountVO;
+import vo.HourCountKey;
 import vo.SystemInvokeCountVO;
 
 import java.io.IOException;

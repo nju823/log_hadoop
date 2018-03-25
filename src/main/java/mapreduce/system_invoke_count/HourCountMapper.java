@@ -6,6 +6,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import util.TimeUtil;
 import vo.AccessLogVO;
+import vo.HourCountKey;
 
 import java.io.IOException;
 
