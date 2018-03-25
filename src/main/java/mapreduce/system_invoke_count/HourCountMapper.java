@@ -1,12 +1,14 @@
 package mapreduce.system_invoke_count;
 
 import com.alibaba.fastjson.JSONObject;
+import mapreduce.service_sencond_statistic.ServiceSecondStatisticJob;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import util.TimeUtil;
 import vo.AccessLogVO;
 import vo.HourCountKey;
+import vo.ServiceSecondStatisticVO;
 
 import java.io.IOException;
 
@@ -19,14 +21,12 @@ public class HourCountMapper extends Mapper<LongWritable,Text,Text,LongWritable>
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        AccessLogVO logVO= JSONObject.parseObject(value.toString(),AccessLogVO.class);
-        if(logVO.getSource()==null)
-            logVO.setSource("client");
-        if(logVO.getType()!=1)
+        ServiceSecondStatisticVO logVO= JSONObject.parseObject(value.toString(),ServiceSecondStatisticVO.class);
+        if(logVO==null)
             return;
         HourCountKey countkey=new HourCountKey(logVO.getSource(),logVO.getTarget()
-                ,TimeUtil.getHour(logVO.getCurrentMillis()), TimeUtil.getDate(logVO.getCurrentMillis()));
-        context.write(new Text(JSONObject.toJSONString(countkey)),new LongWritable(1));
+                ,Integer.parseInt(logVO.getSecond().substring(0,2)), logVO.getDate());
+        context.write(new Text(JSONObject.toJSONString(countkey)),new LongWritable(logVO.getAccess_count()));
     }
 
 }

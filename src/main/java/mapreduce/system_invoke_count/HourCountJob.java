@@ -20,7 +20,7 @@ public class HourCountJob {
 
 
     public void run() {
-        String inputPath= HdfsUtil.HDFS+"log_2018318";
+        String inputPath= HdfsUtil.HDFS+"log_2018318_statistic/service/second";
         JobInitDbModel jobInitModel=new JobInitDbModel(new String[]{inputPath},new Configuration(),null,"system_invoke_count"
                 , Main.class,null, HourCountMapper.class, Text.class, LongWritable.class,null,null
                 , HourCountReducer.class, SystemInvokeCountVO.class,Text.class);

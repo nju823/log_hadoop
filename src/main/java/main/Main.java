@@ -12,7 +12,7 @@ import test.LoadData;
 public class Main {
 
     public static void main(String[] args){
-        ServiceSecondStatisticJob serviceSecondStatisticJob=new ServiceSecondStatisticJob();
-        serviceSecondStatisticJob.run();
+        HourCountJob hourCountJob=new HourCountJob();
+        hourCountJob.run();
     }
 }

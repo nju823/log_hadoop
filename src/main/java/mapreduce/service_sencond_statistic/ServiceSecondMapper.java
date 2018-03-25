@@ -25,8 +25,6 @@ public class ServiceSecondMapper extends Mapper<LongWritable,Text,Text,Text>{
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         MergedAccessLog log=JSONObject.parseObject(value.toString(),MergedAccessLog.class);
         if(log==null){
-            LoggerUtil.log("--------------------------------------");
-            LoggerUtil.log(value.toString());
             return;
         }
         //复制维度信息
