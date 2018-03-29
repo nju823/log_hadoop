@@ -1,4 +1,4 @@
-package vo;
+package mapreduce.service_sencond_statistic;
 
 /**
  * Created by cong on 2018-03-24.

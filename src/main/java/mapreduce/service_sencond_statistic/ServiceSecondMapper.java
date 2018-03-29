@@ -1,19 +1,14 @@
 package mapreduce.service_sencond_statistic;
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.hadoop.hdfs.util.EnumCounters;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
 import util.BeanUtil;
-import util.LoggerUtil;
 import util.TimeUtil;
 import vo.*;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created by cong on 2018-03-24.

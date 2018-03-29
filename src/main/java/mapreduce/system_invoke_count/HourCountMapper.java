@@ -1,13 +1,10 @@
 package mapreduce.system_invoke_count;
 
 import com.alibaba.fastjson.JSONObject;
-import mapreduce.service_sencond_statistic.ServiceSecondStatisticJob;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import util.TimeUtil;
-import vo.AccessLogVO;
-import vo.HourCountKey;
 import vo.ServiceSecondStatisticVO;
 
 import java.io.IOException;
@@ -25,7 +22,7 @@ public class HourCountMapper extends Mapper<LongWritable,Text,Text,LongWritable>
         if(logVO==null)
             return;
         HourCountKey countkey=new HourCountKey(logVO.getSource(),logVO.getTarget()
-                ,Integer.parseInt(logVO.getSecond().substring(0,2)), logVO.getDate());
+                ,TimeUtil.getHour(logVO.getSecond()), logVO.getDate());
         context.write(new Text(JSONObject.toJSONString(countkey)),new LongWritable(logVO.getAccess_count()));
     }
 

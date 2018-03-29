@@ -1,15 +1,9 @@
-package vo;
-
-import org.apache.hadoop.io.WritableComparable;
-
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
+package mapreduce.service_invoke_count;
 
 /**
- * Created by cong on 2018-03-23.
+ * Created by cong on 2018-03-27.
  */
-public class HourCountKey {
+public class ServiceInvokeCountKey {
 
     private String source;
 
@@ -19,14 +13,16 @@ public class HourCountKey {
 
     private String date;
 
-    public HourCountKey(String source, String target, int hour,String date) {
-        this.source = source;
-        this.target = target;
-        this.hour = hour;
-        this.date=date;
+    private String serviceName;
+
+    private String parentServiceName;
+
+    public String getParentServiceName() {
+        return parentServiceName;
     }
 
-    public HourCountKey() {
+    public void setParentServiceName(String parentServiceName) {
+        this.parentServiceName = parentServiceName;
     }
 
     public String getSource() {
@@ -59,5 +55,13 @@ public class HourCountKey {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 }

@@ -1,5 +1,7 @@
 package vo;
 
+import java.sql.PreparedStatement;
+
 /**
  * Created by cong on 2018-03-24.
  * 访问量，响应时间累积，异常次数，超时次数，慢调用次数
@@ -30,6 +32,7 @@ public class StatisticVO {
      * 慢访问次数
      */
     private long slow_count;
+
 
     public StatisticVO() {
     }

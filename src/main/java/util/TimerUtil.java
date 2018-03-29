@@ -18,7 +18,7 @@ public class TimerUtil {
 
     private static final int ONE_DAY=1000*60*60*24;
 
-    public void excuteDaily(Runnable runnable){
+    public static void excuteDaily(Runnable runnable){
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String nextDay=TimeUtil.getDate(new Date().getTime()+ONE_DAY);
         long delay=0;
@@ -30,5 +30,6 @@ public class TimerUtil {
         }
         EXECUTOR.scheduleAtFixedRate(runnable,delay,ONE_DAY, TimeUnit.MILLISECONDS);
     }
+
 
 }

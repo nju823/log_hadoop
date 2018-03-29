@@ -16,6 +16,27 @@ public class TimeUtil {
 
     private static final String SECOND_FORMAT="HH:mm:ss";
 
+    private static final int ONE_DAY=1000*60*60*24;
+
+
+    public static String yesterday(){
+        Date date=new Date();
+        date.setTime(date.getTime()-ONE_DAY);
+        SimpleDateFormat dateFormat=new SimpleDateFormat(DATE_FOMART);
+        String[] strings=dateFormat.format(date).split("-");
+        return Integer.parseInt(strings[0])+""+Integer.parseInt(strings[1])+""+Integer.parseInt(strings[2]);
+    }
+
+    /**
+     * 获取小时数，second格式 hh:mm:ss
+     * @param second
+     * @return
+     */
+    public static int getHour(String second){
+        String hour=second.split(":")[0];
+        return Integer.parseInt(hour);
+    }
+
     /**
      * 获取timestamp的日期
      * @param timestamp
@@ -50,7 +71,7 @@ public class TimeUtil {
     }
 
     public static void main(String[] args){
-        System.out.println(getHour(System.currentTimeMillis()));
+        System.out.println(yesterday());
 
     }
 

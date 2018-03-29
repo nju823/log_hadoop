@@ -1,5 +1,6 @@
 package vo;
 
+import mapreduce.service_sencond_statistic.ServiceSecondKey;
 import util.BeanUtil;
 
 /**
@@ -46,7 +47,7 @@ public class ServiceSecondStatisticVO extends StatisticVO{
 
     }
 
-    public ServiceSecondStatisticVO(ServiceSecondKey serviceSecondKey,StatisticVO statisticVO){
+    public ServiceSecondStatisticVO(ServiceSecondKey serviceSecondKey, StatisticVO statisticVO){
         BeanUtil.copyProperties(this,serviceSecondKey);
         BeanUtil.copyProperties(this,statisticVO);
     }

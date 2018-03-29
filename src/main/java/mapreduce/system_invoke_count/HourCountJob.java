@@ -1,6 +1,8 @@
 package mapreduce.system_invoke_count;
 
 import main.Main;
+import mapreduce.job_control.BaseJob;
+import mapreduce.job_control.PathController;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -16,11 +18,12 @@ import vo.SystemInvokeCountVO;
 /**
  * Created by cong on 2018-03-23.
  */
-public class HourCountJob {
+public class HourCountJob extends BaseJob{
 
+    PathController pathController=new PathController();
 
     public void run() {
-        String inputPath= HdfsUtil.HDFS+"log_2018318_statistic/service/second";
+        String inputPath= pathController.getSencondStatisticPath();
         JobInitDbModel jobInitModel=new JobInitDbModel(new String[]{inputPath},new Configuration(),null,"system_invoke_count"
                 , Main.class,null, HourCountMapper.class, Text.class, LongWritable.class,null,null
                 , HourCountReducer.class, SystemInvokeCountVO.class,Text.class);

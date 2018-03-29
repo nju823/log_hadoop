@@ -1,7 +1,6 @@
 package mapreduce.service_sencond_statistic;
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import vo.*;
